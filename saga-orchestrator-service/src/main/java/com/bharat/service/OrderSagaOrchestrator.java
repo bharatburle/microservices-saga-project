@@ -28,6 +28,7 @@ public class OrderSagaOrchestrator {
 		Map<String, Object> orderPayload = Map.of("item", req.getItem(), "quantity", req.getQuantity(), "status",
 				"PENDING");
 
+		@SuppressWarnings("rawtypes")
 		ResponseEntity<Map> orderResponse = restTemplate.postForEntity("http://order-service/orders", orderPayload,
 				Map.class);
 
@@ -39,6 +40,7 @@ public class OrderSagaOrchestrator {
 		// --------------------------------------------------
 		Map<String, Object> paymentPayload = Map.of("orderId", orderId, "amount", req.getAmount());
 
+		@SuppressWarnings("rawtypes")
 		ResponseEntity<Map> paymentResponse = restTemplate.postForEntity("http://payment-service/payment/process",
 				paymentPayload, Map.class);
 
